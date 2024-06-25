@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/cross-tab-generator/static/css/main.9bce910b.css",
+    "main.js": "/cross-tab-generator/static/js/main.fe0ed78c.js",
+    "static/js/453.cc530484.chunk.js": "/cross-tab-generator/static/js/453.cc530484.chunk.js",
+    "index.html": "/cross-tab-generator/index.html",
+    "main.9bce910b.css.map": "/cross-tab-generator/static/css/main.9bce910b.css.map",
+    "main.fe0ed78c.js.map": "/cross-tab-generator/static/js/main.fe0ed78c.js.map",
+    "453.cc530484.chunk.js.map": "/cross-tab-generator/static/js/453.cc530484.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9bce910b.css",
+    "static/js/main.fe0ed78c.js"
+  ]
+}
