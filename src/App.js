@@ -2,9 +2,11 @@ import './App.css';
 import {useState} from 'react';
 import FileUploader from './components/FileUploader';
 import TopBar from './components/TopBar';
-import NewFileButton from './components/NewFileButton';
-import DropDownMenu from './components/DropDownMenu';
-import CrossTab from './components/CrossTab';
+import DropDownMenu from './components/CrossTabComponents/DropDownMenu';
+import CrossTab from './components/CrossTabComponents/CrossTab';
+import TopLineCrossTabSelection from './components/TopLineCrossTabSelection';
+import TopLineDropDownMenu from './components/TopLineComponents/TopLineDropdownMenu';
+import TopLine from './components/TopLineComponents/TopLine'
 
 function App() {
 
@@ -16,6 +18,10 @@ function App() {
 
   const [dropDownOneSelection, setDropDownOneSelection] = useState('Select Question');
   const [dropDownTwoSelection, setDropDownTwoSelection] = useState('Select Question');
+
+  const [lineTabSelected, setLineTabSelected] = useState('Tab');
+
+  const [topLineDropDownSelection, setTopLineDropDownSelection] = useState('Select Question');
 
 
   const passFileDataToParent = (rowsArray, values) => {
@@ -32,6 +38,8 @@ function App() {
     setFileUploadVisible(true);
     setDropDownOneSelection('Select Question');
     setDropDownTwoSelection('Select Question');
+    setTopLineDropDownSelection('Select Question');
+    setLineTabSelected('Tab');
   }
 
   const passDropDownOneSelectionToParent = (DropDownOneSelection) => {
@@ -42,6 +50,16 @@ function App() {
     setDropDownTwoSelection(DropDownTwoSelection);
   }
 
+  const handleLineTabSelection = (lineTabSelection) => {
+    setLineTabSelected(lineTabSelection);
+    setDropDownOneSelection('Select Question');
+    setDropDownTwoSelection('Select Question');
+    setTopLineDropDownSelection('Select Question');
+  }
+
+  const passTopDownDropDownSelectionToParent = (topLineDropDownSelection) => {
+    setTopLineDropDownSelection(topLineDropDownSelection);
+  }
   
 
   if (fileUploadVisible) {
@@ -55,15 +73,32 @@ function App() {
     return (
         <div className="App">
           <TopBar handleNewFileClick={handleNewFileClick}/>
-          <DropDownMenu 
-            options={rowsArray[0]}
-            passDropDownOneSelectionToParent={passDropDownOneSelectionToParent}
-            passDropDownTwoSelectionToParent={passDropDownTwoSelectionToParent}
-          />
+          <TopLineCrossTabSelection handleLineTabSelection={handleLineTabSelection}/>
+          {(lineTabSelected == 'Tab') 
+            ? <div> 
+                <DropDownMenu 
+                  options={rowsArray[0]}
+                  passDropDownOneSelectionToParent={passDropDownOneSelectionToParent}
+                  passDropDownTwoSelectionToParent={passDropDownTwoSelectionToParent}
+                />
 
-          {(dropDownOneSelection != 'Select Question' && dropDownTwoSelection != 'Select Question')
-             ? <CrossTab rowsArray={rowsArray} values={values} selectionOne={dropDownOneSelection} selectionTwo={dropDownTwoSelection}/> : <div />
+                {(dropDownOneSelection != 'Select Question' && dropDownTwoSelection != 'Select Question')
+                  ? <CrossTab rowsArray={rowsArray} values={values} selectionOne={dropDownOneSelection} selectionTwo={dropDownTwoSelection}/> : <div />
+                }
+              </div>
+            :
+              <div>
+                <TopLineDropDownMenu 
+                  options={rowsArray[0]}
+                  passTopDownDropDownSelectionToParent={passTopDownDropDownSelectionToParent}
+                />
+                {(topLineDropDownSelection != 'Select Question')
+                  ? <TopLine rowsArray={rowsArray} values={values} selectedQuestion={topLineDropDownSelection} /> : <div />
+                }
+              </div>
+            
           }
+          
         </div>
       );
   }
