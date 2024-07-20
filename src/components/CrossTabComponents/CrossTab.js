@@ -3,6 +3,7 @@ import CrossTabBox from './CrossTabBox';
 import CrossTabRow from './CrossTabRow';
 import CrossTabColumnHeaderRow from './CrossTabColumnHeaderRow';
 import CrossTabTotalRow from './CrossTabTotalRow';
+import ExportAsExcelButton from './ExportAsExcelButton';
 
 function CrossTab( props ) {
 
@@ -110,7 +111,9 @@ function CrossTab( props ) {
     }
 
     calculateCrossTab();
+    console.log('Similarity Matrix')
     console.log(similarityMatrix);
+    console.log('Percentage Matrix')
     console.log(percentageMatrix);
 
 
@@ -126,6 +129,7 @@ function CrossTab( props ) {
             })
             }
             <CrossTabTotalRow total={columnOne.length} values={similarityMatrix}/>
+            <ExportAsExcelButton col1Dict={col1Dict} col2Dict={col2Dict} similarityMatrix={similarityMatrix} percentageMatrix={percentageMatrix} total={columnOne.length} selectionOne={selectionOne} selectionTwo={selectionTwo}/>
     </div>
     )
 }

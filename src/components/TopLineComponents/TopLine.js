@@ -1,6 +1,7 @@
 import './TopLine.css'
 import TopLineColumnHeaderRow from './TopLineColumnHeaderRow'
 import TopLineRow from './TopLineRow';
+import ExportTopLineAsExcelButton from './ExportTopLineAsExcelButton';
 
 function CrossTab( props ) {
 
@@ -77,6 +78,7 @@ function CrossTab( props ) {
             })
             }
             <TopLineRow rowLabel={'Total'} value={column.length} percentage={100}/>
+            <ExportTopLineAsExcelButton colDict={colDict} values={frequencyArray} percentages={percentageArray} total={column.length} selection={selection}/>
     </div>
     )
 }
